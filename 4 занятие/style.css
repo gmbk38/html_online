@@ -1,0 +1,67 @@
+.red_block {
+    background-color: rgb(150, 0, 0);
+    width: 30px;
+    height: 30px;
+}
+
+#size {
+    -webkit-animation: size_ch 2s linear infinite;
+    animation: size_ch 2s linear infinite;
+}
+
+@-webkit-keyframes size_ch {
+    0% { width: 30px;}
+    50% {  width: 60px;}
+    100% {  width: 30px;}
+}
+@keyframes size_ch {
+    0% { width: 30px;}
+    50% {  width: 60px;}
+    100% {  width: 30px;}
+}
+
+#margin {
+    -webkit-animation: margin_ch 2s linear infinite;
+    animation: margin_ch 2s linear infinite;
+}
+
+@-webkit-keyframes margin_ch {
+    0% { margin-left: 0; }
+    50% { margin-left: 100px; }
+    100% { margin-left: 0;}
+}
+@keyframes margin_ch {
+    0% { margin-left: 0; }
+    50% { margin-left: 100px; }
+    100% { margin-left: 0;}
+}
+
+#color {
+    -webkit-animation: color_ch 2s linear infinite;
+    animation: color_ch 2s linear infinite;
+}
+
+@-webkit-keyframes color_ch {
+    0% { background-color: rgb(150, 0, 0); }
+    50% { background-color: rgb(255, 255, 255); }
+    100% { background-color: rgb(150, 0, 0); }
+}
+@keyframes color_ch {
+    0% { background-color: rgb(150, 0, 0); }
+    50% { background-color: rgb(255, 255, 255); }
+    100% { background-color: rgb(150, 0, 0); }
+}
+
+#when_cursor {
+    transition: 2s;
+}
+
+#when_cursor:hover {
+    width: 100px;
+    height: 100px;
+    transition: 2s;
+}
+
+#cursor_click {
+    transition: 2s;
+}
