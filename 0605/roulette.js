@@ -78,7 +78,8 @@ let rarity_colors = {
 
 let block = 1;
 let lc_block = 1;
-let curr_balance = 2901;
+let curr_balance = php_balance;
+let curr_login = php_login;
 let price = 0;
 
 for (let i = 0; i < brandico.length; i++) {
@@ -147,13 +148,16 @@ for (let i = 0; i < cards.length - 1; i++) {
 
 function start() {
   
-  if (block < 1) {
-    // return false;
-    return window.location.reload();
+  if (block < 1 || curr_balance - 899 < 0) {
+    return false;
+  } else if(block < 1) {
+	return window.location.reload();
   }
 
   block--;
   curr_balance -= 899;
+  $(".balance_for_php").val(curr_balance);
+  $(".login_for_php").val(php_login);
 
   jQuery(".balance").text(curr_balance);
 
@@ -232,12 +236,23 @@ function start() {
 
 function sell() {
   curr_balance += price;
+  $(".balance_for_php").val(curr_balance);
+  $(".drop_for_php").val(price);
   jQuery(".balance").text(curr_balance);
 
   let win_window = document.querySelector('.win_window');
   win_window.style.display = "none";
 }
 
+function get() {
+  $(".balance_for_php").val(curr_balance);
+  get_price = price + 100000;
+  $(".drop_for_php").val(get_price);
+  jQuery(".balance").text(curr_balance);
+
+  let win_window = document.querySelector('.win_window');
+  win_window.style.display = "none";
+}
 
 function last_chance() {
 

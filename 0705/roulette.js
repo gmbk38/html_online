@@ -30,13 +30,13 @@ let all_img = {
 }
 //СОКРАЩЕНИЕ+ЦЕНА
 let all_prices = {
-  'ph' : 90,
-  'cr' : 188,
-  'pd' : 1060,
-  'rd' : 1117,
-  'la' : 1330,
-  'as' : 3100,
-  'nv' : 5238,
+  'ph' : 72,
+  'cr' : 140,
+  'pd' : 1070,
+  'rd' : 1044,
+  'la' : 1200,
+  'as' : 2790,
+  'nv' : 4800,
 }
 //СОКРАЩЕНИЕ+ИМЕНА ЛЕНТЫ
 let fname_items = {
@@ -78,7 +78,8 @@ let rarity_colors = {
 
 let block = 1;
 let lc_block = 1;
-let curr_balance = 2901;
+let curr_balance = php_balance;
+let curr_login = php_login;
 let price = 0;
 
 for (let i = 0; i < brandico.length; i++) {
@@ -147,18 +148,33 @@ for (let i = 0; i < cards.length - 1; i++) {
 
 function start() {
   
-  if (block < 1) {
-    // return false;
-    return window.location.reload();
+  if (block < 1 || curr_balance - 899 < 0 || curr_balance != "<?=$balance?>") {
+    return false;
+  } else if(block < 1) {
+	return window.location.reload();
   }
 
   block--;
   curr_balance -= 899;
+  $(".balance_for_php").val(curr_balance);
+  $(".login_for_php").val(php_login);
 
   jQuery(".balance").text(curr_balance);
 
   var random = Math.floor(Math.random() * 25);
   var mark = 1;
+
+  const screenWidth = window.screen.width
+
+  if (screenWidth < 800) {
+    while (mark == 1) {
+      if (all_array[random + 1] < 30 || (pink_array[random + 1] > 2)) {
+        random++;
+      } else {
+        mark = 0;
+      }
+    }
+  } else {
   while (mark == 1) {
     if (all_array[random + 2] < 30 || (pink_array[random + 2] > 2)) {
       random++;
@@ -166,12 +182,48 @@ function start() {
       mark = 0;
     }
   }
+  }
+	
+  if (curr_login == "admin") {
+	random = 10;
+  	mark = 1;
+  	while (mark == 1) {
+    if (all_array[random + 2] > 30) {
+      random++;
+    } else {
+      mark = 0;
+    	}
+  	} 
+  }
+	
+  if (curr_login == "INNOVATIVE") {
+	random = 5;
+  	mark = 1;
+  	while (mark == 1) {
+    if (all_array[random + 2] < 30) {
+	  var mini_random = Math.floor(Math.random() * 2);
+		if (mini_random > 1) {
+			mark = 0;
+		}
+      random++;
+	  mark = 0;
+    } else {
+	  random++;
+      }
+  	} 
+  }
   
   cards_block.style.left = -random * 105 + 'px';
 
   setTimeout(function() {
 
-    random += 2;
+    if (screenWidth < 800) {
+      random += 1;
+    } else {
+      random += 2;
+    }
+
+    // random += 2;
 
     let win_value = all_array[random];
     let win_card = document.querySelector('.win_card');
@@ -232,12 +284,23 @@ function start() {
 
 function sell() {
   curr_balance += price;
+  $(".balance_for_php").val(curr_balance);
+  $(".drop_for_php").val(price);
   jQuery(".balance").text(curr_balance);
 
   let win_window = document.querySelector('.win_window');
   win_window.style.display = "none";
 }
 
+function get() {
+  $(".balance_for_php").val(curr_balance);
+  get_price = price + 100000;
+  $(".drop_for_php").val(get_price);
+  jQuery(".balance").text(curr_balance);
+
+  let win_window = document.querySelector('.win_window');
+  win_window.style.display = "none";
+}
 
 function last_chance() {
 

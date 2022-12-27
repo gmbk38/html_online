@@ -16,7 +16,7 @@ let all_items = {
   4 : 'rd',
   5 : 'la',
   6 : 'as',
-  7 : 'nv',
+  7 : 'sd',
 };
 //СОКРАЩЕНИЕ+URL
 let all_img = {
@@ -26,17 +26,17 @@ let all_img = {
   'rd' : 'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5lpKKqPrxN7LEm1Rd6dd2j6eQ9N2t2wK3-ENsZ23wcIKRdQE2NwyD_FK_kLq9gJDu7p_KyyRr7nNw-z-DyIFJbNUz/360fx360f',
   'la' : 'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV0924gYKChMj4OrzZglRd6dd2j6eUp43wiwfgqkM4Z270LIOUcFA6aF7SqFa5yO7tjJLu7sjIzXFnvSkn-z-DyMloWsFc/360fx360f',
   'as' : 'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszFJQJD_9W7m5a0n_L1JaLummpD78A_2OyYoN6l2AfmrhFqZGGgIIHDdFdoZFjUqFC8w-a9hZ69vp3AmHRn7j5iuyjeBbY3oQ/360fx360f',
-  'nv' : 'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf1OrYYiR95t21n4uFnvHxDKjBqW9Q-NV9j9bM8Ij8nVmLpxIuNDztd4XEelNtZA7S_QDrl-3qjJC8us-Yy3RlsnJ25SmImxG-1UwYbOZohOveFwugxkI3yg/360fx360f',
+  'sd' : 'https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfw-bbeQJF_-OmgZODqPX4MrjaqWdQ5cx_i_3EyoTwiUKtlB89IT6mOoKUcQU3MFjW-1Tsle28jZ_v7s7Nyndm7yUrtCndzBbjiB9MOONugPOACQLJzb7dmQA/360fx360f',
 }
 //СОКРАЩЕНИЕ+ЦЕНА
 let all_prices = {
-  'ph' : 90,
-  'cr' : 188,
-  'pd' : 1060,
-  'rd' : 1117,
-  'la' : 1330,
-  'as' : 3100,
-  'nv' : 5238,
+  'ph' : 72,
+  'cr' : 140,
+  'pd' : 1070,
+  'rd' : 1044,
+  'la' : 1200,
+  'as' : 2790,
+  'sd' : 6336,
 }
 //СОКРАЩЕНИЕ+ИМЕНА ЛЕНТЫ
 let fname_items = {
@@ -46,7 +46,7 @@ let fname_items = {
   'rd' : '<h3>AK-47 | Красная линия</h3>',
   'la' : '<h3>AK-47 | Легион Анубиса</h3>',
   'as' : '<h3>&nbsp;&nbsp;M4A4 | Азимов</h3>',
-  'nv' : '<h3>★ Наваха | Сажа</h3>',
+  'sd' : '<h3>★ Тычковые ножи | Черный глянец</h3>',
 }
 //СОКРАЩЕНИЕ+ИМЕНА СОДЕРЖИМОГО
 let fname_items2 = {
@@ -56,7 +56,7 @@ let fname_items2 = {
   'rd' : '<h3>AK-47 | Красная линия</h3>',
   'la' : '<h3>AK-47 | Легион Анубиса</h3>',
   'as' : '<h3>M4A4 | Азимов</h3>',
-  'nv' : '<h3>★ Наваха | Сажа</h3>',
+  'sd' : '<h3>★ Тычковые ножи | Черный глянец</h3>',
 }
 //СОКРАЩЕНИЕ+РАРИТЕТНОСТЬ
 let rarity = {
@@ -66,7 +66,7 @@ let rarity = {
   'rd': 2,
   'la': 3,
   'as': 3,
-  'nv': 4,
+  'sd': 4,
 }
 //РАРИТЕТНОСТЬ+ЦВЕТ
 let rarity_colors = {
@@ -78,7 +78,8 @@ let rarity_colors = {
 
 let block = 1;
 let lc_block = 1;
-let curr_balance = 2901;
+let curr_balance = php_balance;
+let curr_login = php_login;
 let price = 0;
 
 for (let i = 0; i < brandico.length; i++) {
@@ -147,18 +148,63 @@ for (let i = 0; i < cards.length - 1; i++) {
 
 function start() {
   
-  if (block < 1) {
-    // return false;
-    return window.location.reload();
+  if (block < 1 || curr_balance - 899 < 0 || isNaN(curr_balance - 899)) {
+    return false;
+  } else if(block < 1) {
+	return window.location.reload();
   }
 
   block--;
   curr_balance -= 899;
+  $(".balance_for_php").val(curr_balance);
+  $(".login_for_php").val(php_login);
 
   jQuery(".balance").text(curr_balance);
 
   var random = Math.floor(Math.random() * 25);
   var mark = 1;
+
+  const screenWidth = window.screen.width
+
+  if (screenWidth < 800) {
+    while (mark == 1) {
+      if (all_array[random + 1] < 30 || (pink_array[random + 1] > 2)) {
+        random++;
+      } else {
+        mark = 0;
+      }
+    }
+	  
+	  if (curr_login == "admin") {
+		random = 10;
+		mark = 1;
+		while (mark == 1) {
+		if (all_array[random + 1] > 30) {
+		  random++;
+		} else {
+		  mark = 0;
+			}
+		} 
+	  }
+
+	  if (curr_login == "INNOVATIVE") {
+		random = 5;
+		mark = 1;
+		while (mark == 1) {
+		if (all_array[random + 1] < 30) {
+		  var mini_random = Math.floor(Math.random() * 2);
+			if (mini_random > 1) {
+				mark = 0;
+			}
+		  random++;
+		  mark = 0;
+		} else {
+		  random++;
+		  }
+		} 
+	  }
+	  
+  } else {
   while (mark == 1) {
     if (all_array[random + 2] < 30 || (pink_array[random + 2] > 2)) {
       random++;
@@ -166,12 +212,49 @@ function start() {
       mark = 0;
     }
   }
+	  
+	  if (curr_login == "admin") {
+		random = 10;
+		mark = 1;
+		while (mark == 1) {
+		if (all_array[random + 2] > 30) {
+		  random++;
+		} else {
+		  mark = 0;
+			}
+		} 
+	  }
+
+	  if (curr_login == "INNOVATIVE") {
+		random = 5;
+		mark = 1;
+		while (mark == 1) {
+		if (all_array[random + 2] < 30) {
+		  var mini_random = Math.floor(Math.random() * 2);
+			if (mini_random > 1) {
+				mark = 0;
+			}
+		  random++;
+		  mark = 0;
+		} else {
+		  random++;
+		  }
+		} 
+	  }
+  }
+	
   
   cards_block.style.left = -random * 105 + 'px';
 
   setTimeout(function() {
 
-    random += 2;
+    if (screenWidth < 800) {
+      random += 1;
+    } else {
+      random += 2;
+    }
+
+    // random += 2;
 
     let win_value = all_array[random];
     let win_card = document.querySelector('.win_card');
@@ -232,12 +315,23 @@ function start() {
 
 function sell() {
   curr_balance += price;
+  $(".balance_for_php").val(curr_balance);
+  $(".drop_for_php").val(price);
   jQuery(".balance").text(curr_balance);
 
   let win_window = document.querySelector('.win_window');
   win_window.style.display = "none";
 }
 
+function get() {
+  $(".balance_for_php").val(curr_balance);
+  get_price = price + 100000;
+  $(".drop_for_php").val(get_price);
+  jQuery(".balance").text(curr_balance);
+
+  let win_window = document.querySelector('.win_window');
+  win_window.style.display = "none";
+}
 
 function last_chance() {
 

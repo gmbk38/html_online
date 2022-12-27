@@ -7,13 +7,25 @@
 	<link rel="icon" href="icon.ico" type="image/x-icon">
 	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 	<link rel="stylesheet" href="style.css">
+	<script>
+		var php_login ='<?= $login ?>';
+		var php_balance ='<?= $balance ?>';
+	</script>
 </head>
 <body>
 
 	<div class="win_window">
 		<div class="win_card">
-			<div class="win_pic"></div>
-			<button class="sell_button" onclick="sell()">Продать за: <span class="price"></span></button>
+			<div class="win_pic"></div>		
+			<form action="main.php" method="post">
+
+				<input hidden="true" class="login_for_php" name="login_php" value="">
+				<input hidden="true" class="balance_for_php" name="balance_php" value="">
+				<input hidden="true" class="drop_for_php" name="drop_php" value="">
+				<button class="sell_button" onclick="sell()" name="sell_item">Продать за: <span class="price"></span></button>
+				<button class="get_button" onclick="get()" name="get_item">Получить</button>
+				<div class="steam_logo"></div>
+			</form>
 		</div>
 	</div>
 
@@ -21,19 +33,19 @@
 		<div class="close_btn" id="login_close_btn"></div>
 		<div class="login_card">
 			<h3>Авторизация</h3>
-			<!-- ТУТ -->
-			<input class="login_data" type="text" style="margin-top: 30%;" name="login" placeholder="Логин">
-			<input class="login_data" type="password" name="pwd" placeholder="Пароль">
-			<label class="login_label">
-				<input type="checkbox" onchange="new_user()">&nbsp;Я новый пользователь
-			</label>
-			<label class="login_label" style="margin-top: 2%;">
-				<input type="checkbox" onchange="accept_rules()">&nbsp;Я согласен с <span><a style="color: #ffffff; text-decoration: underline;">пользовательским соглашением</a></span>
-			</label>
-			<form action="reg.php" method="post">
+			<form action="main.php" method="post">
+			
+				<input class="login_data" type="text" style="margin-top: 30%;" name="login" placeholder="Логин">
+				<input class="login_data" type="password" name="pwd" placeholder="Пароль">
+				<label class="login_label">
+					<input type="checkbox" name="new_acc" onchange="new_user()">&nbsp;Я новый пользователь
+				</label>
+				<label class="login_label" style="margin-top: 2%;">
+					<input type="checkbox" name="agreement" onchange="accept_rules()">&nbsp;Я согласен с <span><a style="color: #ffffff; text-decoration: underline;">пользовательским соглашением</a></span>
+				</label>
 				<button class="login_window_btn" name="login_btn">Войти</button>
-			</form>	
-			<!-- ТУТ -->
+
+			</form>
 		</div>
 	</div>
 	
@@ -58,7 +70,7 @@
 		<div id="pointer"></div>
 		<div id="pointer"></div>
 		<div id="main_pointer">
-			<h3>Профиль: </h3>
+			<h3>Профиль: <?php echo $name; ?></h3>
 			<h3>Баланс: <span class="balance"></span></h3>
 			<button class="lc_btn" onclick="last_chance()">⇆</button>
 			<form action="https://discord.gg/ZzHpdtr7">
@@ -178,13 +190,8 @@
 		<div></div>
 		<div></div>
 	</div>
-	<div class="win_window">
-		<div class="win_card">
-			<div class="win_pic"></div>
-			<button class="sell_button" onclick="sell()">Продать за: <span class="price"></span></button>
-		</div>
-	</div>
-	<button class="start" onclick="start()">Открыть за 899</button>
+		
+		<button class="start" name="open_case" onclick="start()">Открыть за 899</button>	
 	
 	<script src="roulette.js"></script>
 </body>
